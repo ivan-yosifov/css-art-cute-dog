@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cute Dog</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body{
+			background: #9eb5f6;
+		}
+		.container{
+			width: 600px;
+			height: 600px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+			border: 1px solid white;
+		}
+		.bubble{
+			width: 360px;
+			height: 360px;
+			background: #a9bffb;
+			border-radius: 50%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+		}
+		.bubble:before, .bubble:after{
+			content: '';
+			width: 120px;
+			height: 120px;
+			background: inherit;
+			border-radius: inherit;			
+			position: inherit;
+		}
+		.bubble:before{
+			right: -40px;
+			top: 20px;
+		}
+		.bubble:after{
+			bottom: -30px;
+			left: 40px;
+			transform: scale(1.4);
+		}
+		.bubbles{
+			width: 40px;
+			height: 40px;
+			background: #a9bffb;
+			border-radius: 50%;
+			position: absolute;
+			right: 170px;
+			top: 80px;
+		}
+		.bubbles:before, .bubbles:after{
+			content: '';
+			width: inherit;
+			height: inherit;
+			background: inherit;
+			border-radius: inherit;
+			position: inherit;
+		}
+		.bubbles:before{
+			left: -330px;
+			bottom: -320px;
+			transform: scale(1.5);
+		}
+		.bubbles:after{
+			left: -85px;
+			bottom: -410px;
+			transform: scale(.8);
+		}
+		.dog{
+			width: 220px;
+			height: 90px;
+			background: #fee7af;
+			border-radius: 60px;
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 100px;
+			margin: auto;
+			z-index: 1;
+			overflow: hidden;
+		}		
+		.head{
+			width: 170px;
+			height: 120px;
+			background: #fee7af;
+			border-radius: 70px 70px 0 0;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 55px;
+			margin: auto;
+			overflow: hidden;
+		}
+		/*patch*/
+		.dog:after, .head:after{
+			content: '';
+			width: 110px;
+			height: 130px;
+			border-radius: 50%;
+			background: #fecf94;
+			position: absolute;
+		}
+		.dog:after{
+			left: 0;
+			bottom: 55px;
+		}
+		.head:after{
+			left: -25px;
+			bottom: -30px;
+		}
+		.eyes{
+			width: 16px;
+			height: 16px;
+			background: #89766c;
+			border-radius: 50%;
+			position: absolute;
+			left: 140px;
+			bottom: 175px;
+			z-index: 1;
+			box-shadow: 65px 0 #89766c;
+			animation: blink 3s infinite linear;
+		}
+		@keyframes blink{
+			4%{
+				transform: scaleY(.1);
+			}
+			15%{
+				transform: scaleY(1);
+			}
+		}
+		.nose{
+			width: 44px;
+			height: 24px;
+			background: #89766c;
+			border-radius: 20% 20% 50% 50% / 25% 25% 70% 70%;
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 145px;
+			margin: auto;
+			z-index: 3;
+		}
+		.nose:before{
+			content: '';
+			width: 24px;
+			height: 10px;
+			background: #a58f82;
+			border-radius: inherit;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 4px;
+			margin: auto;
+		}
+		.mouth{
+			width: 50px;
+			height: 25px;
+			background: #fee7af;
+			border: 5px solid #9a7b6a;
+			border-top: 0;
+			border-bottom-left-radius: 30px;
+			border-bottom-right-radius: 30px;
+			position: absolute;
+			bottom: 125px;			
+			z-index: 2;		
+		}
+		.mouth:before{
+			content: '';
+			width: 5px;
+			height: 5px;
+			background: #9a7b6a;
+			border-radius: 50%;
+			position: inherit;
+			top: -2.5px;
+		}
+		.mouth.left{
+			left: 132.5px;
+		}
+		.mouth.right{
+			right: 132.5px;
+		}
+		.left.mouth:before{
+			left: -5px;
+		}
+		.right.mouth:before{
+			right: -5px;
+		}
+		.tongue{
+			width: 36px;
+			height: 40px;
+			background: #ffc7d0;
+			border-radius: 0 0 50px 50px;
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 105px;
+			margin: auto;
+			z-index: 1;
+		}
+		.tongue:before{
+			content: '';
+			width: 5px;
+			height: 36px;
+			background: #fea4b0;
+			border-radius: 10px;
+			position: inherit;
+			left: 0;
+			right: 0;
+			margin: auto;
+		}
+		.ear{
+			position: absolute;
+			background: #89766c;
+			z-index: 1;
+		}
+		.ear:before,
+		.ear:after{
+			content: '';
+			position: inherit;
+			background: inherit;
+		}
+		.ear,
+		.ear:before,
+		.ear:after{
+			width: 50px;
+			height: 50px;
+			border-top-right-radius: 30%;
+		}
+		.ear{
+			transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+		}
+		.ear:before{
+			transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+		}
+		.ear:after{
+			transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+		}
+		.ear-left{
+			position: absolute;
+			left: 104px;
+			top: 56px;
+			transform: rotate(30deg);
+			z-index: 1;
+		}
+		.ear-right{
+			position: absolute;
+			right: 150px;
+			top: 80px;
+			transform: rotate(-30deg);
+			z-index: 1;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="bubble">
+
+			<div class="ear-left">
+				<div class="ear"></div>
+			</div>
+
+			<div class="ear-right">
+				<div class="ear"></div>
+			</div>
+			
+			<div class="head"></div>
+			<div class="dog"></div>
+			<div class="eyes"></div>
+			<div class="nose"></div>
+			<div class="mouth left"></div>
+			<div class="mouth right"></div>
+			<div class="tongue"></div>
+
+		</div>
+		<div class="bubbles"></div>
+	</div>
+</body>
+</html>
